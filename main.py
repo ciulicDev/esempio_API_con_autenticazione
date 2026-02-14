@@ -50,3 +50,19 @@ for u in utenti:
             "name": u["name"],
             "Error": response.status_code
         })
+
+#salvare report json
+with open("report_api.json", "w") as f:
+    json.dump(risposte, f, indent=2)
+
+
+#salvare report csv
+with open("report_api.csv", "w", newline="") as f:
+    campi = risposte[0].keys()
+    writer = csv.DictWriter(f, fieldnames=campi)
+    writer.writeheader()
+    for r in risposte:
+        writer.writerow(r)
+
+print ("report JSON e CSV salvati")
+
